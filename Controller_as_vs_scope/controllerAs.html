@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+
+<!-- This time we have to create an alias for our controller to use the controller as syntax - in this case "main" -->
+    
+<div ng-app="myApp" ng-controller="myCtrl as main">
+
+First Name: <input type="text" ng-model="main.firstName"><br>
+<br>
+    
+<!--ng-show is a directive that shows an element if a statement is true, this time we have to refer to our controller's alias-->
+    
+<div ng-show="main.firstName">Name: {{main.firstName}}</div>
+    
+<!-- In controllerAs syntax everything is being attached to $scope behind the cutrains -->
+
+</div>
+
+<script>
+    
+//Here we create our module and contain it's reference in the "app" variable
+    
+var app = angular.module('myApp', []);
+    
+/* We no longer have to do a dependency injection of $scope, instead we can use "this" keyword to refer to the controller  */
+
+app.controller('myCtrl', [function() {
+    
+    /* Because "this" is relative, we can't use "this" all the time in certain cases. So here we will create a variable "that" to contain the given instance of "this" reference". In this case it is useless, however it's better to start getting used to doing this, as not to forget later on. */
+    
+    var that = this;
+    that.firstName = "";
+}]);
+</script>
+
+</body>
+</html>
